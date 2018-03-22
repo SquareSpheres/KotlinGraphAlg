@@ -63,3 +63,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.idea/gradle.xml
+.idea/compiler.xml
+*.xml
+*.iml
+*.class
+out/production/classes/META-INF/ConnectedComponents_main.kotlin_module
