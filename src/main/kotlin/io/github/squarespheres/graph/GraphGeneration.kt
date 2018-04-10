@@ -1,6 +1,18 @@
 package io.github.squarespheres.graph
 
+import io.github.squarespheres.graph.graphs.directed.DirectedGraphAdjList
+import io.github.squarespheres.graph.graphs.SimpleGraphAlt
+import io.github.squarespheres.graph.graphs.undirected.UndirectedGraphAdjList
 import java.util.*
+
+
+fun emptyUnidrectedGraph(): IUndirectedGraph {
+    return UndirectedGraphAdjList(0)
+}
+
+fun emptyDirectedGraph(): IDirectedGraph {
+    return DirectedGraphAdjList(0)
+}
 
 
 /**
@@ -29,14 +41,14 @@ fun generateAlternativeSimpleGraph(numVertices: Long, numEdges: Long): SimpleGra
 }
 
 /**
- * Add random edges to graph
+ * Add random edges to graph. Multiple edges and loops are allowed.
  * @param graph graph to fill
  * @param numEdges number of edges to add
  */
-fun randomFillGraph(graph: ISimpleGraph, numEdges: Long) {
+fun randomFillGraph(graph: IGraph, numEdges: Long) {
 
 
-    if (graph is IDigraph) {
+    if (graph is IDirectedGraph) {
         require(graph.numEdges() + numEdges <= (graph.numVertices() * (graph.numVertices() - 1))) { "Too many edges" }
         require(numEdges > 0) { "Too few edges" }
     } else {
@@ -47,6 +59,7 @@ fun randomFillGraph(graph: ISimpleGraph, numEdges: Long) {
     val numEdgesToReach = graph.numEdges() + numEdges
 
     val random = Random()
+
     while (graph.numEdges() < numEdgesToReach) {
         val v = random.nextInt(graph.numVertices())
         val w = random.nextInt(graph.numVertices())
@@ -54,18 +67,19 @@ fun randomFillGraph(graph: ISimpleGraph, numEdges: Long) {
             graph.addEdge(v, w)
         }
     }
-}
 
+
+}
 
 /**
  * Generate a random simple graph
  * @param numVertices number of vertices
  * @param numEdges number of edges
  * @return a graph SimpleGraphAlt
- * @see SimpleGraph
+ * @see UndirectedGraphAdjList
  */
-fun generateRandomSimpleGraph(numVertices: Long, numEdges: Long): SimpleGraph {
-    val simpleGraph = SimpleGraph(numVertices.toInt())
+fun generateRandomSimpleGraph(numVertices: Long, numEdges: Long): UndirectedGraphAdjList {
+    val simpleGraph = UndirectedGraphAdjList(numVertices.toInt())
     randomFillGraph(simpleGraph, numEdges)
     return simpleGraph
 }
@@ -75,10 +89,10 @@ fun generateRandomSimpleGraph(numVertices: Long, numEdges: Long): SimpleGraph {
  * @param numVertices number of vertices
  * @param numEdges number of edges
  * @return a graph SimpleGraphAlt
- * @see SimpleGraph
+ * @see UndirectedGraphAdjList
  */
-fun generateRandomSimpleDiGraph(numVertices: Long, numEdges: Long): SimpleDiGraph {
-    val simpleDiGraph = SimpleDiGraph(numVertices.toInt())
+fun generateRandomSimpleDiGraph(numVertices: Long, numEdges: Long): DirectedGraphAdjList {
+    val simpleDiGraph = DirectedGraphAdjList(numVertices.toInt())
     randomFillGraph(simpleDiGraph, numEdges)
     return simpleDiGraph
 }

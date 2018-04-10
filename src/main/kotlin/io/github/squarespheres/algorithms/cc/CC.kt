@@ -1,12 +1,12 @@
-package io.github.squarespheres.cc
+package io.github.squarespheres.algorithms.cc
 
-import io.github.squarespheres.graph.SimpleGraph
+import io.github.squarespheres.graph.IUndirectedGraph
 import java.util.*
 
 /**
- * Sequential algorithms for finding connected components in a graph
+ * Sequential algorithms for finding connected components in undirected graphs
  */
-class CC(private val graph: SimpleGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
+class CC(private val graph: IUndirectedGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
 
 
     enum class ALGORITHM {
@@ -24,9 +24,10 @@ class CC(private val graph: SimpleGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
         BFS
     }
 
-    private val marked = BooleanArray(graph.numVertices)
-    private val components = IntArray(graph.numVertices)
-    private val size = IntArray(graph.numVertices)
+
+    private val marked = BooleanArray(graph.numVertices())
+    private val components = IntArray(graph.numVertices())
+    private val size = IntArray(graph.numVertices())
     private var componentCount: Int = 0
 
 
@@ -39,8 +40,8 @@ class CC(private val graph: SimpleGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
     }
 
 
-    private fun connectedComponents(func: (SimpleGraph, Int) -> Unit) {
-        for (i in 0 until graph.numVertices) {
+    private fun connectedComponents(func: (IUndirectedGraph, Int) -> Unit) {
+        for (i in 0 until graph.numVertices()) {
             if (!marked[i]) {
                 func.invoke(graph, i)
             }
@@ -49,7 +50,7 @@ class CC(private val graph: SimpleGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
     }
 
 
-    private fun dfs(graph: SimpleGraph, v: Int) {
+    private fun dfs(graph: IUndirectedGraph, v: Int) {
 
         marked[v] = true
         components[v] = componentCount
@@ -61,7 +62,7 @@ class CC(private val graph: SimpleGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
         }
     }
 
-    private fun itDfs(graph: SimpleGraph, v: Int) {
+    private fun itDfs(graph: IUndirectedGraph, v: Int) {
 
         val stack = Stack<Int>()
         stack.add(v)
@@ -78,7 +79,7 @@ class CC(private val graph: SimpleGraph, algorithm: ALGORITHM = ALGORITHM.DFS) {
         }
     }
 
-    private fun bfs(graph: SimpleGraph, v: Int) {
+    private fun bfs(graph: IUndirectedGraph, v: Int) {
 
         val queue = LinkedList<Int>()
         queue.push(v)

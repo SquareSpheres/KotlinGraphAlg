@@ -1,4 +1,4 @@
-package io.github.squarespheres.cc
+package io.github.squarespheres.algorithms.cc
 
 import io.github.squarespheres.graph.Edge
 import kotlinx.coroutines.experimental.CommonPool

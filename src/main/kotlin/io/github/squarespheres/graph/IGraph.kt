@@ -1,11 +1,9 @@
 package io.github.squarespheres.graph
 
 /**
- * An interface for a graph in which both multiple edges and loops are disallowed.
- *
- * A simple graph is by definition undirected, but this interface can also apply to directed graphs
+ * An interface for a graph
  */
-interface ISimpleGraph {
+interface IGraph {
 
     /**
      * Add a edge from v to w
@@ -13,13 +11,6 @@ interface ISimpleGraph {
      * @param w to
      */
     fun addEdge(v: Int, w: Int)
-
-    /**
-     * Get the outdegree for a vertex. For undirected graphs indegree==outdegree
-     * @param vertex vertex
-     * @return outdegree for vertex
-     */
-    fun outDegree(vertex: Int): Int
 
     /**
      * Get list of vertices adjacent from vertex
@@ -39,5 +30,20 @@ interface ISimpleGraph {
      * @return number of vertices
      */
     fun numVertices(): Int
+
+    /**
+     * Check if the graph contains an edge v->w
+     * @param v from
+     * @param w to
+     * @return true if edge exist in graph
+     */
+    fun hasEdge(v: Int, w: Int): Boolean
+
+    /**
+     * get list of edges in the graph
+     * @return list of edges
+     */
+    fun edgeList(): List<Edge>
+
 
 }

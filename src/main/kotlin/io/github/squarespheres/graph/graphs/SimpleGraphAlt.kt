@@ -1,4 +1,6 @@
-package io.github.squarespheres.graph
+package io.github.squarespheres.graph.graphs
+
+import io.github.squarespheres.graph.Edge
 
 /**
  * A simple graph is an undirected graph in which both multiple edges and loops are disallowed.
@@ -8,7 +10,7 @@ package io.github.squarespheres.graph
  * You will not be able to find out which vertex another vertex is adjacent to without going through every edge.
  * This type of graph is fast and useful for finding connected components.
  *
- * @see SimpleGraph
+ * @see UndirectedGraphAdjList
  */
 class SimpleGraphAlt(val numVertices: Int) {
 

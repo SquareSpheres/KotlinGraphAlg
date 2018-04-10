@@ -1,5 +1,5 @@
-import io.github.squarespheres.cc.CCSolver_Threads
-import io.github.squarespheres.cc.connectedComponents
+import io.github.squarespheres.algorithms.cc.CCSolver_Threads
+import io.github.squarespheres.algorithms.cc.connectedComponents
 import io.github.squarespheres.graph.Edge
 import io.github.squarespheres.graph.generateAlternativeSimpleGraph
 
